@@ -1,8 +1,8 @@
 use bevy::prelude::*;
 
+use super::{GraphicsAssets, PIECE_Z, TILE_SIZE};
 use crate::board::components::Position;
 use crate::pieces::components::Piece;
-use super::{GraphicsAssets, TILE_SIZE, PIECE_Z};
 
 pub fn spawn_piece_renderer(
     mut commands: Commands,
@@ -12,7 +12,7 @@ pub fn spawn_piece_renderer(
     for (entity, position, piece) in query.iter() {
         let sprite_idx = match piece.kind.as_str() {
             "Player" => 1,
-            _ => 63
+            _ => 63,
         };
         let mut sprite = TextureAtlasSprite::new(sprite_idx);
         sprite.custom_size = Some(Vec2::splat(TILE_SIZE));
