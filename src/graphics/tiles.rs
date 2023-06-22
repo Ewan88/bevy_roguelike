@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use super::{GraphicsAssets, TILE_SIZE};
+use super::{GraphicsAssets, TILE_SIZE, TILE_Z};
 use crate::board::components::{Position, Tile};
 
 pub fn spawn_tile_renderer(
@@ -12,11 +12,7 @@ pub fn spawn_tile_renderer(
         let mut sprite = TextureAtlasSprite::new(177);
         sprite.custom_size = Some(Vec2::splat(TILE_SIZE));
         sprite.color = Color::OLIVE;
-        let v = Vec3::new(
-            TILE_SIZE * position.v.x as f32,
-            TILE_SIZE * position.v.y as f32,
-            0.,
-        );
+        let v = super::get_world_position(&position, TILE_Z);
         commands.entity(entity).insert(SpriteSheetBundle {
             sprite,
             texture_atlas: assets.sprite_texture.clone(),
